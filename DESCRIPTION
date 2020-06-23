@@ -1,0 +1,16 @@
+Package: kmGeoHelper
+Title: Collection of geo related functions 
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Konstantin",
+           family = "Mingoulin",
+           role = c("aut", "cre"),
+           email = "kmingoulin@gmail.com",
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+Description: Most functions work with net_coord approach around Agricultural region of Canada. Project allows to read weather data, create geographical densities. There are some sp-related helper functions. How many sentenses I need to include to make you happy.
+License: GPL
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.1.1
+Imports: sp, data.table, MASS
+Depends: R (>= 2.10)
