@@ -3,5 +3,7 @@
 export(coord2net2)
 export(cutRange)
 export(valueByNet2Density)
+export(valueByNet2Density2)
+import(data.table)
 import(sp)
 importFrom(stats,as.formula)

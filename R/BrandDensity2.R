@@ -11,7 +11,7 @@
 #'@param h comes from MASS::kde2d. kernel parameters. See MASS::kde2d for details
 #'@param n comes from MASS::kde2d. size of the grid.See MASS::kde2d for details
 #'@param tracker an optional string that can be supplied to be added to df_ranges and dens_ranges
-valueByNet2Density<-function(df,value_col,resolution=10,df_ranges=NULL,dens_ranges=NULL,h=2,n=50,tracker="Some Brand"){
+valueByNet2Density2<-function(df,value_col,resolution=10,df_ranges=NULL,dens_ranges=NULL,h=2,n=50,tracker="Some Brand"){
   resolution<-resolution-1
   if(is.null(df_ranges)){
     df_ranges<-attr(cut(df[value_col][df[value_col]>0],resolution),
