@@ -1,31 +1,31 @@
-#'Simple convert value by net_coord to density
-#'@import data.table
-#'@importFrom stats as.formula
-#'@export
-#'@param df dataframe with net coord and some value, 2 columns
-#'@param value_col value, most likely transactions summed by net_coord
-#'@param resolution how many categories for density will be created. default=10
-#'@param h comes from MASS::kde2d. kernel parameters. See MASS::kde2d for details
-#'@param n comes from MASS::kde2d. soze of the grid.See MASS::kde2d for details
-valueByNet2Density<-function(df,value_col,resolution=10,h=2,n=50){
-  df<-data.table(df)
-  df[eval(value_col)>0,value_cat:=cut(eval(as.symbol(value_col)),resolution,labels = FALSE)][eval(value_col)==0,value_cat:=0][,value_cat:=value_cat+1]
-  df.value<-df[rep(seq_len(nrow(df)),df$value_cat)]
-  df.value<-merge(df.value,net_coord_centers,by="net_counter")
-
-  # compute density
-  df.value.density<-kde2d_2_df(df.value$long,df.value$lat,h=h,n=n)
-  names(df.value.density)<-c("long","lat","density")
-
-  df.value.density<-coord2net2(net_coord_SP_base,"ID",df.value.density,"long","lat")
-  df.value.density<-subset(df.value.density,!is.na(ID))
-  setnames(df.value.density,"ID","net_counter")
-
-  df.value.density$density_cat<-cut(df.value.density$density,resolution,labels = FALSE)
-
-  return(df.value.density)
-
-}
+#' #'Simple convert value by net_coord to density
+#' #'@import data.table
+#' #'@importFrom stats as.formula
+#' #'@export
+#' #'@param df dataframe with net coord and some value, 2 columns
+#' #'@param value_col value, most likely transactions summed by net_coord
+#' #'@param resolution how many categories for density will be created. default=10
+#' #'@param h comes from MASS::kde2d. kernel parameters. See MASS::kde2d for details
+#' #'@param n comes from MASS::kde2d. soze of the grid.See MASS::kde2d for details
+#' valueByNet2Density<-function(df,value_col,resolution=10,h=2,n=50){
+#'   df<-data.table(df)
+#'   df[eval(value_col)>0,value_cat:=cut(eval(as.symbol(value_col)),resolution,labels = FALSE)][eval(value_col)==0,value_cat:=0][,value_cat:=value_cat+1]
+#'   df.value<-df[rep(seq_len(nrow(df)),df$value_cat)]
+#'   df.value<-merge(df.value,net_coord_centers,by="net_counter")
+#'
+#'   # compute density
+#'   df.value.density<-kde2d_2_df(df.value$long,df.value$lat,h=h,n=n)
+#'   names(df.value.density)<-c("long","lat","density")
+#'
+#'   df.value.density<-coord2net2(net_coord_SP_base,"ID",df.value.density,"long","lat")
+#'   df.value.density<-subset(df.value.density,!is.na(ID))
+#'   setnames(df.value.density,"ID","net_counter")
+#'
+#'   df.value.density$density_cat<-cut(df.value.density$density,resolution,labels = FALSE)
+#'
+#'   return(df.value.density)
+#'
+#' }
 
 #' #valueByNet2Density(df,"customer_value")
 #'

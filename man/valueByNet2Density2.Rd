@@ -25,7 +25,7 @@ valueByNet2Density2(df, value_col, resolution = 10, df_ranges = NULL,
 
 \item{tracker}{an optional string that can be supplied to be added to df_ranges and dens_ranges}
 
-\item{PY}{an adjustment factor. use 1 for CY, adjust to decline (CY/PY) for PY}
+\item{PY}{an adjustment factor. use 1 for CY, adjust to decline CY/PY for PY}
 }
 \description{
 Function outputs netcoord with density and density ranges that can be used to produce consisted densities year over year

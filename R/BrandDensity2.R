@@ -11,7 +11,7 @@
 #'@param h comes from MASS::kde2d. kernel parameters. See MASS::kde2d for details
 #'@param n comes from MASS::kde2d. size of the grid.See MASS::kde2d for details
 #'@param tracker an optional string that can be supplied to be added to df_ranges and dens_ranges
-#'@param PY an adjustment factor. use 1 for CY, adjust to decline (CY/PY) for PY
+#'@param PY an adjustment factor. use 1 for CY, adjust to decline CY/PY for PY
 valueByNet2Density2<-function(df,value_col,resolution=10,df_ranges=NULL,dens_ranges=NULL,h=2,n=50,tracker="Some Brand",PY=1){
   resolution<-resolution-1
   if(is.null(df_ranges)){
