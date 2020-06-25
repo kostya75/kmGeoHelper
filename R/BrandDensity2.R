@@ -6,12 +6,13 @@
 #'@param df dataframe with net coord and some value, 2 columns
 #'@param value_col value, most likely transactions summed by net_coord
 #'@param resolution how many categories for density will be created. default=10
-#'@param df_ranges character vector that is simialar to the output of *cut* function. Each element represents a range closed on the right
-#'@param dens_ranges character vector that is simialar to the output of *cut* function. Each element represents a range closed on the right
+#'@param df_ranges character vector that is simialar to the output of *cut* function. Each element represents a range closed on the right. NULL for current season, adjustment for PY
+#'@param dens_ranges character vector that is simialar to the output of *cut* function. Each element represents a range closed on the right. NULL for current season, adjustment for PY
 #'@param h comes from MASS::kde2d. kernel parameters. See MASS::kde2d for details
 #'@param n comes from MASS::kde2d. size of the grid.See MASS::kde2d for details
 #'@param tracker an optional string that can be supplied to be added to df_ranges and dens_ranges
-valueByNet2Density2<-function(df,value_col,resolution=10,df_ranges=NULL,dens_ranges=NULL,h=2,n=50,tracker="Some Brand"){
+#'@param PY an adjustment factor. use 1 for CY, adjust to decline (CY/PY) for PY
+valueByNet2Density2<-function(df,value_col,resolution=10,df_ranges=NULL,dens_ranges=NULL,h=2,n=50,tracker="Some Brand",PY=1){
   resolution<-resolution-1
   if(is.null(df_ranges)){
     df_ranges<-attr(cut(df[value_col][df[value_col]>0],resolution),
@@ -36,6 +37,7 @@ valueByNet2Density2<-function(df,value_col,resolution=10,df_ranges=NULL,dens_ran
                       "level")
   }
 
+  df.value.density$density<-df.value.density$density/PY
   df.value.density<-cutRange(df.value.density,"density",dens_ranges,F)
   cache<-list(df_ranges,dens_ranges)
   names(cache)<-c(sprintf("df%s",tracker),sprintf("dens%s",tracker))
@@ -43,7 +45,6 @@ valueByNet2Density2<-function(df,value_col,resolution=10,df_ranges=NULL,dens_ran
   return(list(df.value.density=df.value.density,cache=cache))
 
 }
-
 ###############################################
 # Convert density matrix into a data frame
 
