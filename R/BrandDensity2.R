@@ -20,6 +20,7 @@ valueByNet2Density2<-function(df,value_col,resolution=10,df_ranges=NULL,dens_ran
   }
 
   df<-cutRange(df,value_col,df_ranges,T)
+  df$value_cat[is.na(df$value_cat)]<-resolution
   df.value<-df[rep(seq_len(nrow(df)),df$value_cat),]
   df.value<-merge(df.value,net_coord_centers,by="net_counter")
 
@@ -39,6 +40,7 @@ valueByNet2Density2<-function(df,value_col,resolution=10,df_ranges=NULL,dens_ran
 
   df.value.density$density<-df.value.density$density/PY
   df.value.density<-cutRange(df.value.density,"density",dens_ranges,F)
+  df.value.density$value_cat[is.na(df.value.density$value_cat)]<-resolution+1
   cache<-list(df_ranges,dens_ranges)
   names(cache)<-c(sprintf("df%s",tracker),sprintf("dens%s",tracker))
 
