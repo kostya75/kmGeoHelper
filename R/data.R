@@ -22,3 +22,10 @@ load("data/net_coord_centers.rda")
 #'@format dataframe
 "Net_Postal_base"
 load("data/Net_Postal_base.rda")
+
+#'net_coord is ggplot fortified df
+#'redundant: can be obtained by fortifying net_coord_SP
+#'@source generated data
+#'@format dataframe
+"net_coord"
+load("data/net_coord.rda")
