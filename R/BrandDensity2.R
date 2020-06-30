@@ -40,7 +40,8 @@ valueByNet2Density2<-function(df,value_col,resolution=10,df_ranges=NULL,dens_ran
 
   df.value.density$density<-df.value.density$density/PY
   df.value.density<-cutRange(df.value.density,"density",dens_ranges,F)
-  df.value.density$value_cat[is.na(df.value.density$value_cat)]<-resolution+1
+  resolution<-resolution+1
+  #df.value.density$value_cat[is.na(df.value.density$value_cat)]<-resolution+1
   print(resolution)
   cache<-list(df_ranges,dens_ranges)
   names(cache)<-c(sprintf("df%s",tracker),sprintf("dens%s",tracker))
